@@ -1,3 +1,10 @@
+/* Allowable parameters:
+
+description: [skill- c++,javascript,html,css,python,ruby, api, react,node.js,jquery]
+location:[remote/texas]
+type: fulltime[yes/no{parttime/contract}]
+
+*/
 var searchBtnEl = document.querySelector('#searchBtn'); // Reference to search button
 
 var buttonClickHandler = function(event) {
@@ -9,13 +16,13 @@ var buttonClickHandler = function(event) {
 
 function getJobData() {
     var apiUrl = 'https://jobs.github.com/positions.json?location=remote'
-
+        //console.log(apiUrl); //the api url works 
     fetch(apiUrl)
         .then(function(response) {
             if (response.ok) {
-                response.json().then(function(data) {
+                response.then(function(data) {
                     console.log(data);
-                    // If Adzuna returns empty data object, alert the user and go back
+                    // If github jobs returns empty data object, alert the user and go back
                     if (data == " ") {
                         alert('Error: ' + 'We could not find that city, please try again.');
                         return;
@@ -29,6 +36,7 @@ function getJobData() {
         .catch(function(error) {
             alert('Unable to connect to GitHub Jobs');
         });
+    console.log(fetch(apiUrl));
 }
 
 function displayResults(resultsArray) {
