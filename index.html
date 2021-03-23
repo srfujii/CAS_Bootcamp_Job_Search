@@ -1,51 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- BootStrap CSS & Font Awesome -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
-    <link href="./assets/css/style.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>CAS Job Search</title>
 </head>
+
 <body>
-    <header>
-        <!-- Heading with Navbar -->
-        <nav class="navbar navbar-dark bg-dark">
-            <div class="container-fluid" style="justify-content: center;"">
-                <span class="navbar-brand mb-0 h1">Job Search</span>
-            </div>
-        </nav>
-    </header>
-        
-    <!-- Main Body Content -->
-    <main class="container-fluid vh-100">
-            <div class="row">
-
-              <!-- COLUMN 1 : SEARCH FOR A SKILL -->
-              <div class="col-3">
-                <h4>Search for a Skill:</h4>
-                    <div class="input-group mb-3">
-                        <input id="skill" type="text" class="form-control" placeholder="Skill" aria-label="Skill" aria-describedby="button-addon2">
-                        <button class="btn btn-primary" type="button" id="searchBtn"><i class="fas fa-search"></i></button>
-                    </div>
-              </div>
+    <div class="container">
+        <header>
+            <h1>LOOKING FOR A JOB?</h1>
               
-              <!-- COLUMN 2 : JOB SEARCH RESULT -->
-              <div class="col-9">
-                    <div class="row mb-4 mt-3">
-                        <div id = "searchResults" class="col-12"></div>
-                    </div>
-              </div>
-            </div>
-    </main>
+            <select id="optionSelectBox" class="browser-default">
+                <option value="" disabled selected>Choose your skill:</option>
+                <option value="0">HTML</option>
+                <option value="1">CSS</option>
+                <option value="2">JQuery </option>
+                <option value="3">Moment</option>
+                <option value="4">Bootstrap</option>
+                <option value="5">JavaScript</option>
+            </select>
 
+            <p>
+                <label>
+                    <input class="with-gap" name="group3" type="radio" checked />
+                    <span>Texas</span>
+                </label>
+                <label>
+                    <input class="with-gap" name="group3" type="radio" checked />
+                    <span>Remote</span>
+                </label> 
+            
+                <button id="searchBtn" class="btn waves-effect waves-light" type="submit" name="action">Search</button>
+            </p>
+        </header>
+
+        <!-- Main Body Content -->
+        <main>
+            <div>
+                <div class="row">
+                    <div id="searchResults" class="col s12">
+                    
+                        <!-- SEARCH RESULTS DYNAMICALLY GENERATED AND DISPLAYED HERE -->
+
+                </div> <!-- END COL DIV -->
+            </div>  <!-- END ROW DIV -->            
+        </div>  <!-- END NOCLASS DIV -->
+    </main> <!-- END MAIN -->
     
-    <!-- BootStrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
