@@ -5,22 +5,41 @@
 var searchBtnEl = document.querySelector('#searchBtn');             // Reference to search button
 var optionSelectBoxEl = document.querySelector('#optionSelectBox');  // id = optionSelectBox
 var selectedSkill = "javascript";
+var formEl = document.querySelector('#searchForm');
 
 
-var buttonClickHandler = function (event) {
-    event.preventDefault();                   // Prevent default action
+// var buttonClickHandler = function (event) {
+//     event.preventDefault();                   // Prevent default action
   
-    console.log("We clicked the button");
-    getJobData(selectedSkill);
-  };
+//     console.log("We clicked the button");
+//     getJobData(selectedSkill);
+//   };
 
-// function selectOptionHandler (event) {
+function formSubmitHandler (event) {
     
-//     event.preventDefault();
-//     console.log("Changed our skill");
-//     selectedSkill = event.options[event.selectedIndex].text;
-//     console.log(selectedSkill);
-// };
+    event.preventDefault();
+    console.log("We clicked the button");
+    console.log(event);
+    var selectedValue = document.getElementById("optionSelectBox").value;
+    var selectedText = document.getElementById(`${selectedValue}`);
+    selectedText = selectedText.textContent;
+
+    console.log(selectedValue);
+    console.log(selectedText);
+    selectedSkill = selectedText;
+    console.log("Selected Skill: " + selectedSkill);
+
+    var selectedTexas = document.getElementById("texas");
+
+    if (selectedTexas.checked) {
+        console.log("Texas is checked, yee-haw!!!");
+        getJobData(selectedSkill);
+    } else {
+        // Run Cesar's Web API query for Remote
+        console.log("Cesar web API query to run here!");
+    }
+    
+};
 
 function getJobData (skillName) {
     var apiUrl = 'https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=81c88f02&app_key=8fd8923d7be696f1f642efb26fcc6fd7&results_per_page=50&what=' + skillName + '&where=Texas';
@@ -32,7 +51,7 @@ function getJobData (skillName) {
                     console.log(data);
                     // If Adzuna returns empty data object, alert the user and go back
                     if (data == "") {
-                        alert('Error: ' + 'We could not find skillset, please try again.');
+                        alert('Error: ' + 'We could not find that skillset, please try again.');
                         return;
                     }
                     displayResults(data.results);
@@ -137,6 +156,7 @@ function displayResults (resultsArray) {
 };
 
 /*** Event Listeners ***/
-searchBtnEl.addEventListener('click', buttonClickHandler);
+// searchBtnEl.addEventListener('click', buttonClickHandler);
+formEl.addEventListener('submit', formSubmitHandler);
 // optionSelectBoxEl.addEventListener('onchange', selectOptionHandler);
 
