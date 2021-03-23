@@ -1,29 +1,31 @@
 /* Allowable parameters:
-
 description: [skill- c++,javascript,html,css,python,ruby, api, react,node.js,jquery]
 location:[remote/texas]
 type: fulltime[yes/no{parttime/contract}]
-
 */
+
 var searchBtnEl = document.querySelector('#searchBtn'); // Reference to search button
 
 var buttonClickHandler = function(event) {
     event.preventDefault(); // Prevent default action
-
     console.log("We clicked the button");
     getJobData();
 };
 
+//function getJobData(skillname) {
 function getJobData() {
-    var apiUrl = 'https://jobs.github.com/positions.json?location=remote'
-        //console.log(apiUrl); //the api url works 
+    //var apiUrl = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=remote&description=' + skillname;
+    var apiUrl = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=remote&description=javascript'
+        /*'https://cors-anywhere.herokuapp.com/' remove this part once deploy to github pages so it doesnt conflict w/ cors*/
+
+    //console.log(apiUrl); //the api url works 
     fetch(apiUrl)
         .then(function(response) {
             if (response.ok) {
-                response.then(function(data) {
+                response.json().then(function(data) {
                     console.log(data);
                     // If github jobs returns empty data object, alert the user and go back
-                    if (data == " ") {
+                    if (data == "") {
                         alert('Error: ' + 'We could not find that city, please try again.');
                         return;
                     }
@@ -36,18 +38,16 @@ function getJobData() {
         .catch(function(error) {
             alert('Unable to connect to GitHub Jobs');
         });
-    console.log(fetch(apiUrl));
 }
 
 function displayResults(resultsArray) {
 
     var searchResultsContainerEL = document.querySelector('#searchResults');
-
     searchResultsContainerEL.innerHTML = "";
 
-    var searchResultsTitleEl = document.createElement('h3');
-    searchResultsTitleEl.textContent = "Job Search Results: ";
-    searchResultsContainerEL.appendChild(searchResultsTitleEl);
+    // var searchResultsTitleEl = document.createElement('h3');
+    // searchResultsTitleEl.textContent = "Job Search Results: ";
+    // searchResultsContainerEL.appendChild(searchResultsTitleEl);
 
     // Loop through 50 results
     for (var i = 1; i < resultsArray.length; i++) {

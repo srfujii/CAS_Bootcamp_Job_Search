@@ -3,16 +3,27 @@
 //
 // https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=81c88f02&app_key=8fd8923d7be696f1f642efb26fcc6fd7&results_per_page=50&what=javascript&where=Texas
 var searchBtnEl = document.querySelector('#searchBtn');             // Reference to search button
+var optionSelectBoxEl = document.querySelector('#optionSelectBox');  // id = optionSelectBox
+var selectedSkill = "javascript";
+
 
 var buttonClickHandler = function (event) {
     event.preventDefault();                   // Prevent default action
   
     console.log("We clicked the button");
-    getJobData();
+    getJobData(selectedSkill);
   };
 
-function getJobData () {
-    var apiUrl = 'https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=81c88f02&app_key=8fd8923d7be696f1f642efb26fcc6fd7&results_per_page=50&what=javascript&where=Texas';
+// function selectOptionHandler (event) {
+    
+//     event.preventDefault();
+//     console.log("Changed our skill");
+//     selectedSkill = event.options[event.selectedIndex].text;
+//     console.log(selectedSkill);
+// };
+
+function getJobData (skillName) {
+    var apiUrl = 'https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=81c88f02&app_key=8fd8923d7be696f1f642efb26fcc6fd7&results_per_page=50&what=' + skillName + '&where=Texas';
             
         fetch(apiUrl)
             .then(function (response) {
@@ -38,12 +49,11 @@ function getJobData () {
 function displayResults (resultsArray) {
 
     var searchResultsContainerEL = document.querySelector('#searchResults');
-
     searchResultsContainerEL.innerHTML = "";
     
-    var searchResultsTitleEl = document.createElement('h3');
-    searchResultsTitleEl.textContent = "Job Search Results: ";
-    searchResultsContainerEL.appendChild(searchResultsTitleEl);
+    // var searchResultsTitleEl = document.createElement('h3');
+    // searchResultsTitleEl.textContent = "Job Search Results: ";
+    // searchResultsContainerEL.appendChild(searchResultsTitleEl);
 
     // Loop through 50 results
     for (var i = 1; i < resultsArray.length; i++) {
@@ -63,11 +73,31 @@ function displayResults (resultsArray) {
         var jobDescriptionText = resultsArray[i].description.replace(/<strong>/g, '');
         jobDescriptionText = jobDescriptionText.replace(/<\/strong>/g, '');
 
+        var jobURLText = resultsArray[i].redirect_url.replace(/\"/g, '');
+        console.log(jobURLText);
+
+    // <div class="card blue-grey darken-1">
+    //     <div class="card-content white-text">
+    //         <span class="card-title">Job Title</span>
+    //         <p>I am a very simple card. I am good at containing small bits of information.
+    //         I am convenient because I require little markup to use effectively.</p>
+    //     </div>
+
+    //     <div class="card-action">
+    //         <a href="#">This is a link</a>
+    //         <a href="#">This is a link</a>
+    //     </div>
+    // </div>
+
         //Div to contain individual job info
         var outerDivEl = document.createElement('div');
+        outerDivEl.classList = 'card blue-grey darken-1';
 
-        var h3JobTitleEl = document.createElement('h3');
-        h3JobTitleEl.textContent = jobTitleText;
+        var innerDivEl = document.createElement('div');
+        innerDivEl.classList = 'card-content white-text';
+
+        var spanJobTitleEl = document.createElement('span');
+        spanJobTitleEl.textContent = jobTitleText;
 
         var pJobCategoryEl = document.createElement('p');
         pJobCategoryEl.textContent = resultsArray[i].category.label;
@@ -84,24 +114,29 @@ function displayResults (resultsArray) {
         var pJobLocationEl = document.createElement('p');
         pJobLocationEl.textContent = resultsArray[i].location.display_name;
 
-        var pJobURLEl = document.createElement('p');
+        var anchorDiv = document.createElement('div');
+        anchorDiv.classList = 'card-action';
+
         var aJobURLEl = document.createElement('a');
-        aJobURLEl.setAttribute('src', `${resultsArray[i].redirect_url}`);
-        aJobURLEl.textContent = resultsArray[i].redirect_url;
-        var hrEl = document.createElement('hr');
+        aJobURLEl.setAttribute('href', `${resultsArray[i].redirect_url}`);
+        aJobURLEl.textContent = "Click here for more details and to apply for " + jobTitleText;
+        // var hrEl = document.createElement('hr');
         
         searchResultsContainerEL.appendChild(outerDivEl);
-        outerDivEl.appendChild(h3JobTitleEl);
-        outerDivEl.appendChild(pJobCategoryEl);
-        outerDivEl.appendChild(pCompanyNameEl);
-        outerDivEl.appendChild(pJobCreationDateEl);
-        outerDivEl.appendChild(pJobDescriptionEl);
-        outerDivEl.appendChild(pJobLocationEl);
-        outerDivEl.appendChild(pJobURLEl);
-        pJobURLEl.appendChild(aJobURLEl);
-        outerDivEl.appendChild(hrEl);
+        outerDivEl.appendChild(innerDivEl);
+        innerDivEl.appendChild(spanJobTitleEl);
+        innerDivEl.appendChild(pJobCategoryEl);
+        innerDivEl.appendChild(pCompanyNameEl);
+        innerDivEl.appendChild(pJobCreationDateEl);
+        innerDivEl.appendChild(pJobDescriptionEl);
+        innerDivEl.appendChild(pJobLocationEl);
+
+        outerDivEl.appendChild(anchorDiv);
+        anchorDiv.appendChild(aJobURLEl);
     }
 };
 
 /*** Event Listeners ***/
 searchBtnEl.addEventListener('click', buttonClickHandler);
+// optionSelectBoxEl.addEventListener('onchange', selectOptionHandler);
+
