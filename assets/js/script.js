@@ -81,6 +81,7 @@ function setTexasJobResults (resultsArray) {
         jobTitleText = jobTitleText.replace(/<\/strong>/g, '');
         var jobDescriptionText = resultsArray[i].description.replace(/<strong>/g, '');
         jobDescriptionText = jobDescriptionText.replace(/<\/strong>/g, '');
+        var jobCreationDateText = moment(`${resultsArray[i].created}`).format("LL");
 
         // Sanitize URL data, remove ""
         var jobURLText = resultsArray[i].redirect_url.replace(/\"/g, '');
@@ -89,7 +90,7 @@ function setTexasJobResults (resultsArray) {
         jobObject.jobTitle = jobTitleText;
         jobObject.jobCategory = resultsArray[i].category.label;
         jobObject.companyName = resultsArray[i].company.display_name;
-        jobObject.creationDate = resultsArray[i].created;
+        jobObject.creationDate = jobCreationDateText;
         jobObject.jobLocation = resultsArray[i].location.display_name;
         jobObject.jobDesc = jobDescriptionText;
         jobObject.jobURL = jobURLText;
@@ -113,13 +114,13 @@ function displayTexasJobResults (resultsArray) {
 
         //Div to contain individual job result info
         var outerDivEl = document.createElement('div');
-        outerDivEl.classList = 'card blue-grey darken-1';
+        outerDivEl.classList = 'card teal lighten-2';
 
         var innerDivEl = document.createElement('div');
         innerDivEl.classList = 'card-content white-text';
 
-        var spanJobTitleEl = document.createElement('span');
-        spanJobTitleEl.textContent = resultsArray[i].jobTitle;
+        var h4JobTitleEl = document.createElement('h4');
+        h4JobTitleEl.textContent = resultsArray[i].jobTitle;
 
         var pJobCategoryEl = document.createElement('p');
         pJobCategoryEl.textContent = resultsArray[i].jobCategory;
@@ -142,11 +143,11 @@ function displayTexasJobResults (resultsArray) {
         var aJobURLEl = document.createElement('a');
         aJobURLEl.setAttribute('href', resultsArray[i].jobURL);
         // aJobURLEl.setAttribute('href', `${resultsArray[i].redirect_url}`);
-        aJobURLEl.textContent = "Click here for more details and to apply for " + resultsArray[i].jobTitle;
+        aJobURLEl.textContent = "Click here for more details...";
         
         searchResultsContainerEL.appendChild(outerDivEl);
         outerDivEl.appendChild(innerDivEl);
-        innerDivEl.appendChild(spanJobTitleEl);
+        innerDivEl.appendChild(h4JobTitleEl);
         innerDivEl.appendChild(pJobCategoryEl);
         innerDivEl.appendChild(pCompanyNameEl);
         innerDivEl.appendChild(pJobCreationDateEl);
