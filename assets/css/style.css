@@ -58,3 +58,26 @@ p {
 footer.page-footer {
   margin: 0;
 }
+.card-content p {
+    padding: 0.5%;
+    font-size: 18px;
+}
+
+.card-content h4 {
+    font-weight:900;
+}
+
+.card .card-action:last-child {
+    border-radius: 0 0 2px 2px;
+    background: darkslategrey;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+    text-transform: none;
+}
+
+.card-action a {
+    font-size: 24px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight:900;
+}
