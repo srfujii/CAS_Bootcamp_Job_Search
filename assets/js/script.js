@@ -91,7 +91,7 @@ function displayResults (resultsArray) {
 
         //Div to contain individual job info
         var outerDivEl = document.createElement('div');
-        outerDivEl.classList = 'card indigo';
+        outerDivEl.classList = 'card blue-grey darken-1';
 
         var innerDivEl = document.createElement('div');
         innerDivEl.classList = 'card-content white-text';
@@ -139,4 +139,3 @@ function displayResults (resultsArray) {
 /*** Event Listeners ***/
 searchBtnEl.addEventListener('click', buttonClickHandler);
 // optionSelectBoxEl.addEventListener('onchange', selectOptionHandler);
-
