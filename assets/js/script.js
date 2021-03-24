@@ -1,19 +1,19 @@
 // CAS Bootcamp Job Search JavaScript Code
 
 /*** Global Variables  ***/
-var formEl = document.querySelector('#searchForm');     // Get reference to our Search Form
-var selectedSkill = "";                                 // Global variable for selected skill
+var formEl = document.querySelector('#searchForm'); // Get reference to our Search Form
+var selectedSkill = ""; // Global variable for selected skill
 
 
 /*** Function formSubmitHandler: called when user clicks "Search" button on form ***/
-function formSubmitHandler (event) {
-    
+function formSubmitHandler(event) {
+
     event.preventDefault();
-    
-    var selectedValue = document.getElementById("optionSelectBox").value;   // Get the selected value number 0-5 from the option that was selected
-    var selectedText = document.getElementById(`${selectedValue}`);         // Get reference to html ID associated with selected option
-    selectedText = selectedText.textContent;                                // Get the Text content from the selected option
-    selectedSkill = selectedText;                                           // Set our global "skill" variable to selected skill
+
+    var selectedValue = document.getElementById("optionSelectBox").value; // Get the selected value number 0-5 from the option that was selected
+    var selectedText = document.getElementById(`${selectedValue}`); // Get reference to html ID associated with selected option
+    selectedText = selectedText.textContent; // Get the Text content from the selected option
+    selectedSkill = selectedText; // Set our global "skill" variable to selected skill
 
     // Grab our radio buttons...
     var selectedTexas = document.getElementById("texas");
@@ -25,26 +25,26 @@ function formSubmitHandler (event) {
         // Run Cesar's Web API query for Remote
         console.log("Cesar web API query to run here!");
     }
-    
+
 };
 
 /*** Function getTexasJobData: called by formSubmitHandler, issues fetch to Adzuna API
  *   for user's desired skill. Calls displayTexasResults to display the results of the
  *   query if successful. ***/
-function getTexasJobData (skillName) {
+function getTexasJobData(skillName) {
 
-     // Check to see if skillset-location is already stored in local storage, if so, retrieve & display
-     if (localStorage.getItem(`${skillName}-texas`) !== null) {
-       var skillLocationArray = JSON.parse(localStorage.getItem(`${skillName}-texas`));
-       displayTexasJobResults(skillLocationArray);
+    // Check to see if skillset-location is already stored in local storage, if so, retrieve & display
+    if (localStorage.getItem(`${skillName}-texas`) !== null) {
+        var skillLocationArray = JSON.parse(localStorage.getItem(`${skillName}-texas`));
+        displayTexasJobResults(skillLocationArray);
     } else {
         // Set our fetch URL to skill selected
         var apiUrl = 'https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=81c88f02&app_key=8fd8923d7be696f1f642efb26fcc6fd7&results_per_page=50&what=' + skillName + '&where=Texas';
-                
-            fetch(apiUrl)
-                .then(function (response) {
+
+        fetch(apiUrl)
+            .then(function(response) {
                 if (response.ok) {
-                    response.json().then(function (data) {
+                    response.json().then(function(data) {
                         var searchResultArray = setTexasJobResults(data.results);
                         displayTexasJobResults(searchResultArray);
                         localStorage.setItem(`${skillName}-texas`, JSON.stringify(searchResultArray));
@@ -52,22 +52,22 @@ function getTexasJobData (skillName) {
                 } else {
                     alert('Error: ' + response.statusText);
                 }
-                })
-                .catch(function (error) {
+            })
+            .catch(function(error) {
                 alert('Unable to connect to Adzuna Job Aggregator');
-                });
+            });
     }
 }
 
 
-function setTexasJobResults (resultsArray) {
+function setTexasJobResults(resultsArray) {
 
-    var skillLocationArray = [];                            // An array of job Objects
+    var skillLocationArray = []; // An array of job Objects
 
     for (var i = 0; i < resultsArray.length; i++) {
 
-        var jobObject = {                                   // Job Object populated with job info
-            jobTitle: "",                                       
+        var jobObject = { // Job Object populated with job info
+            jobTitle: "",
             jobCategory: "",
             companyName: "",
             creationDate: "",
@@ -98,12 +98,12 @@ function setTexasJobResults (resultsArray) {
         // Add new job object to end of our array
         skillLocationArray.push(jobObject);
     }
-    return(skillLocationArray);
+    return (skillLocationArray);
 }
 
 /*** Function displayTexasResults: called by getTexasData to display the results of our fetch.
  *      Loops through 50 results and dynamically displays them to the HTML. ***/
-function displayTexasJobResults (resultsArray) {
+function displayTexasJobResults(resultsArray) {
 
     // Empty old results before displaying new ones
     var searchResultsContainerEL = document.querySelector('#searchResults');
@@ -144,7 +144,7 @@ function displayTexasJobResults (resultsArray) {
         aJobURLEl.setAttribute('href', resultsArray[i].jobURL);
         // aJobURLEl.setAttribute('href', `${resultsArray[i].redirect_url}`);
         aJobURLEl.textContent = "Click here for more details...";
-        
+
         searchResultsContainerEL.appendChild(outerDivEl);
         outerDivEl.appendChild(innerDivEl);
         innerDivEl.appendChild(h4JobTitleEl);
