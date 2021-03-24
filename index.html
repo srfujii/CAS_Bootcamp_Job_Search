@@ -2,70 +2,120 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>CAS Job Search</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CAS Gropu</title>
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link href="assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>CAS Job Search</title>
 </head>
-
 <body>
-    <div class="container">
-        <header>
-            <h1>LOOKING FOR A JOB?</h1>
-
-            <form id="searchForm">
-                <label>Choose your skill:</label>
-                <select id="optionSelectBox" class="browser-default">
-                    <option id="0" value="0">HTML</option>
-                    <option id="1" value="1">CSS</option>
-                    <option id="2" value="2">JQuery </option>
-                    <option id="3" value="3">Moment</option>
-                    <option id="4" value="4">Bootstrap</option>
-                    <option id="5" value="5">JavaScript</option>
-                </select>
-                <p>
-                    <label>
-                        <input id="texas" class="with-gap" name="location" type="radio" value="Texas" checked />
-                        <span>Texas</span>
-                    </label>
-                    <label>
-                        <input id="remote" class="with-gap" name="location" type="radio" value="Remote" />
-                        <span>Remote</span>
-                    </label>
-
-                    <button id="searchBtn" class="btn waves-effect waves-light" type="submit" name="action">Search</button>
-                </p>
-            </form>
-        </header>
-
-        <!-- Main Body Content -->
-        <main>
-            <div>
-                <div class="row">
-                    <div id="searchResults" class="col s12">
-
-                        <!-- SEARCH RESULTS DYNAMICALLY GENERATED AND DISPLAYED HERE -->
-
-                    </div>
-                    <!-- END COL DIV -->
+  <!--HEADER SECTION-->
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">CAS Group</a>
+    </div>
+  </nav>
+  <!--FORM SEARCH SECTION-->
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center teal-text text-lighten-2">LOOKING FOR A JOB?</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">THERE'S NO BETTER PLACE TO START</h5>
+        </div>
+        <div class="container">
+          <div class="row">
+            <form id="searchForm" class="searchForm col s12">
+              <select id="optionSelectBox" class="browser-default">
+                <option id="0" value="0">HTML</option>
+                <option id="1" value="1">CSS</option>
+                <option id="2" value="2">JQuery </option>
+                <option id="3" value="3">Moment</option>
+                <option id="4" value="4">Bootstrap</option>
+                <option id="5" value="5">JavaScript</option>
+              </select>
+              <p></p>
+              <div class="row">
+                <label class="col s2.l3 label">
+                  <input id="texas" class="with-gap  " name="location" type="radio" value="Texas" checked />
+                  <span class="white-text bold">Texas</span>
+                </label>
+                <label class="col s2.l3 label">
+                  <input id="remote" class="with-gap" name="location" type="radio" value="Remote" />
+                  <span class="white-text bold">Remote</span>
+                </label>
+              </div>
+              <div class="row">
+                <div class="row center">
+                  <button id="searchBtn" class="btn-large waves-effect waves-light label " type="submit" name="action">Search</button>
                 </div>
-                <!-- END ROW DIV -->
-            </div>
-            <!-- END NOCLASS DIV -->
-        </main>
-        <!-- END MAIN -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="parallax"><img src="assets/img/pexels-mateusz-dach-450035.jpg" alt="background img 1"></div>
+  </div>
+  <!--SEARCH RESULTS DISPLAY-->
+        <div class="container">
+          <div class="section">
+            <!-- Main Body Content -->
+            <main>
+              <div>
+                <div class="row">
+                  <div id="searchResults" class="col s12">
+                    <!-- SEARCH RESULTS DYNAMICALLY GENERATED AND DISPLAYED HERE -->
+                  </div> <!-- END COL DIV -->
+                </div> <!-- END ROW DIV -->
+              </div> <!-- END NOCLASS DIV -->
+            </main> <!-- END MAIN -->
+          </div>
+        </div>
+    </div>
+  </div>
+  <!--PARALLAX IMAGE-->
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light">ENVISION YOUR FUTURE</h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="assets/img/pexels-pixabay-261662.jpg" alt="background img 3"></div>
+  </div>
+  <!--FOOTER-->
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <h5 class="white-text">ABOUT OUR TEAM</h5>
+          <p class="grey-text text-lighten-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium iste
+            praesentium commodi, vero veniam accusantium blanditiis! Molestiae facere, officia voluptatum necessitatibus
+            sed ad, natus vero debitis neque cupiditate, sapiente tenetur?.</p>
+        </div>
+      </div>
+    </div>
+      <div class="footer-copyright">
+        <div class="container">Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">CAS Group</a></div>
+    </div>
+  </footer>
 
 
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-        <script src="./assets/js/github.js"></script>
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="assets/js/materialize.js"></script>
+  <script src="assets/js/init.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="assets/js/script.js"></script>
+
 </body>
 
 </html>
