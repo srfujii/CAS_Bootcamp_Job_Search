@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- CSS -->
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    
+    <title>CAS Job Search</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        header {
+            background-image: url(assets/img/pexels-thisisengineering-3861969.jpg);
+            background-size: cover;
+            background-position: center;
+            min-height: 500px;
+            
+        }
+        
+        #foo{
+            display:none;
+        }
+        .container{
+            padding-top: 5vw;
+            padding-bottom: 4vw;;
+        }
+        #optionSelectBox{
+            margin-top: 5vw;
+            margin-bottom: 4vw;
+        }
+        .bold{
+            font-weight: bolder;
+            font-size: 150% !important;
+        }
+       
+        
+        @media screen and (max-width: 670px) {
+            header {
+                min-height: 300px;
+            }
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <header class="row">
+        <div class="container">
+                <nav class="nav-wrapper transparent">
+                    
+                        <h1 class="center col s12">LOOKING FOR A JOB?</h1>
+                    
+                </nav>
+            <div class="container">
+                <div class="row">
+                    <form class="searchForm col s12 14">
+                            <select id="optionSelectBox" class="browser-default">
+                                <option value="" disabled selected>Choose your skill:</option>
+                                <option id="0" value="0">HTML</option>
+                                <option id="1" value="1">CSS</option>
+                                <option id="2" value="2">JQuery </option>
+                                <option id="3" value="3">Moment</option>
+                                <option id="4"value="4">Bootstrap</option>
+                                <option id="5" value="5">JavaScript</option>
+                            </select>
+                    
+                            <label class="col s2.l3 label">
+                                <input id="texas" class="with-gap  " name="location" type="radio"  value="Texas" checked />
+                                <span class="white-text bold">Texas</span>
+                            </label>
+                    
+                            <label class="col s2.l3  label">
+                                <input id="remote" class="with-gap" name="location" type="radio" value="Remote"/>
+                                <span class="white-text bold">Remote</span>
+                            </label>
+                            <button id="searchBtn" class="indigo btn waves-effect waves-light col s2.l4 push-s1 label " type="submit" name="action">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Body Content -->
+    
+
+    <main >
+        <div>
+            <div class="row">
+                <div id="searchResults" class="col s12">
+                    <!-- SEARCH RESULTS DYNAMICALLY GENERATED AND DISPLAYED HERE -->
+                </div> <!-- END COL DIV -->
+            </div> <!-- END ROW DIV -->
+        </div> <!-- END NOCLASS DIV -->
+    </main> <!-- END MAIN -->
+
+    <!-- Compiled and minified JavaScript -->
+    
+ <!-- footer -->
+ <footer class="page-footer indigo">
+    <div class="container">
+      <div class="row">
+        <div class="col  s12">
+          <h5>About Our Project</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum at lacus congue.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum at lacus congue, suscipit elit nec, tincidunt orci.</p>
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer-copyright grey darken-4">
+      <div class="container center-align">&copy; 2021 CAS Group</div>
+    </div>
+  </footer>
+   
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
