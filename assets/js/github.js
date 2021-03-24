@@ -9,14 +9,13 @@ var searchBtnEl = document.querySelector('#searchBtn'); // Reference to search b
 var buttonClickHandler = function(event) {
     event.preventDefault(); // Prevent default action
     console.log("We clicked the button");
-    getJobData();
+    getGHJData();
 };
 
-//function getJobData(skillname) {
-function getJobData() {
-    //var apiUrl = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=remote&description=' + skillname;
-    var apiUrl = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=remote&description=javascript'
-        /*'https://cors-anywhere.herokuapp.com/' remove this part once deploy to github pages so it doesnt conflict w/ cors*/
+function getGHJData(skillname) {
+    var apiUrl = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=remote&description=' + skillname;
+    //var apiUrl = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=remote&description=javascript'
+    /*'https://cors-anywhere.herokuapp.com/' remove this part once deploy to github pages so it doesnt conflict w/ cors*/
 
     //console.log(apiUrl); //the api url works 
     fetch(apiUrl)
