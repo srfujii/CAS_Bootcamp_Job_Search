@@ -1,95 +1,117 @@
-// Adzuna App ID: 81c88f02
-// Adzuna App Key: 8fd8923d7be696f1f642efb26fcc6fd7
-//
-// https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=81c88f02&app_key=8fd8923d7be696f1f642efb26fcc6fd7&results_per_page=50&what=javascript&where=Texas
-var searchBtnEl = document.querySelector('#searchBtn');             // Reference to search button
-var optionSelectBoxEl = document.querySelector('#optionSelectBox');  // id = optionSelectBox
-var selectedSkill = "javascript";
+// CAS Bootcamp Job Search JavaScript Code
+
+/*** Global Variables  ***/
+var formEl = document.querySelector('#searchForm');     // Get reference to our Search Form
+var selectedSkill = "";                                 // Global variable for selected skill
 
 
-var buttonClickHandler = function (event) {
-    event.preventDefault();                   // Prevent default action
-  
-    console.log("We clicked the button");
-    getJobData(selectedSkill);
-  };
-
-// function selectOptionHandler (event) {
+/*** Function formSubmitHandler: called when user clicks "Search" button on form ***/
+function formSubmitHandler (event) {
     
-//     event.preventDefault();
-//     console.log("Changed our skill");
-//     selectedSkill = event.options[event.selectedIndex].text;
-//     console.log(selectedSkill);
-// };
+    event.preventDefault();
+    
+    var selectedValue = document.getElementById("optionSelectBox").value;   // Get the selected value number 0-5 from the option that was selected
+    var selectedText = document.getElementById(`${selectedValue}`);         // Get reference to html ID associated with selected option
+    selectedText = selectedText.textContent;                                // Get the Text content from the selected option
+    selectedSkill = selectedText;                                           // Set our global "skill" variable to selected skill
 
-function getJobData (skillName) {
-    var apiUrl = 'https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=81c88f02&app_key=8fd8923d7be696f1f642efb26fcc6fd7&results_per_page=50&what=' + skillName + '&where=Texas';
-            
-        fetch(apiUrl)
-            .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    console.log(data);
-                    // If Adzuna returns empty data object, alert the user and go back
-                    if (data == "") {
-                        alert('Error: ' + 'We could not find skillset, please try again.');
-                        return;
-                    }
-                    displayResults(data.results);
+    // Grab our radio buttons...
+    var selectedTexas = document.getElementById("texas");
+
+    // If "Texas" is selected then Susan's search, else Cesar's search
+    if (selectedTexas.checked) {
+        getTexasJobData(selectedSkill);
+    } else {
+        // Run Cesar's Web API query for Remote
+        console.log("Cesar web API query to run here!");
+    }
+    
+};
+
+/*** Function getTexasJobData: called by formSubmitHandler, issues fetch to Adzuna API
+ *   for user's desired skill. Calls displayTexasResults to display the results of the
+ *   query if successful. ***/
+function getTexasJobData (skillName) {
+
+     // Check to see if skillset-location is already stored in local storage, if so, retrieve & display
+     if (localStorage.getItem(`${skillName}-texas`) !== null) {
+       var skillLocationArray = JSON.parse(localStorage.getItem(`${skillName}-texas`));
+       displayTexasJobResults(skillLocationArray);
+    } else {
+        // Set our fetch URL to skill selected
+        var apiUrl = 'https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=81c88f02&app_key=8fd8923d7be696f1f642efb26fcc6fd7&results_per_page=50&what=' + skillName + '&where=Texas';
+                
+            fetch(apiUrl)
+                .then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (data) {
+                        var searchResultArray = setTexasJobResults(data.results);
+                        displayTexasJobResults(searchResultArray);
+                        localStorage.setItem(`${skillName}-texas`, JSON.stringify(searchResultArray));
+                    });
+                } else {
+                    alert('Error: ' + response.statusText);
+                }
+                })
+                .catch(function (error) {
+                alert('Unable to connect to Adzuna Job Aggregator');
                 });
-            } else {
-                alert('Error: ' + response.statusText);
-            }
-            })
-            .catch(function (error) {
-            alert('Unable to connect to Adzuna Job Aggregator');
-            });
+    }
 }
 
-function displayResults (resultsArray) {
 
-    var searchResultsContainerEL = document.querySelector('#searchResults');
-    searchResultsContainerEL.innerHTML = "";
-    
-    // var searchResultsTitleEl = document.createElement('h3');
-    // searchResultsTitleEl.textContent = "Job Search Results: ";
-    // searchResultsContainerEL.appendChild(searchResultsTitleEl);
+function setTexasJobResults (resultsArray) {
 
-    // Loop through 50 results
-    for (var i = 1; i < resultsArray.length; i++) {
+    var skillLocationArray = [];                            // An array of job Objects
 
-        console.log("Job Title: " + resultsArray[i].title);
-        console.log("Job Category: " + resultsArray[i].category.label);
-        console.log("Company Name: " + resultsArray[i].company.display_name);
-        console.log("Job Created On: " + resultsArray[i].created);
-        console.log("Description: " + resultsArray[i].description);
-        console.log("Job Location: " + resultsArray[i].location.display_name);
-        console.log("Job URL: " + resultsArray[i].redirect_url);
-        
-        // Sanitize our results data
+    for (var i = 0; i < resultsArray.length; i++) {
+
+        var jobObject = {                                   // Job Object populated with job info
+            jobTitle: "",                                       
+            jobCategory: "",
+            companyName: "",
+            creationDate: "",
+            jobLocation: "",
+            jobDesc: "",
+            jobURL: ""
+        };
+
+        // Sanitize our results data, remove <strong> and </strong> tags
         var jobTitleText = resultsArray[i].title.replace(/<strong>/g, '');
         jobTitleText = jobTitleText.replace(/<\/strong>/g, '');
-
         var jobDescriptionText = resultsArray[i].description.replace(/<strong>/g, '');
         jobDescriptionText = jobDescriptionText.replace(/<\/strong>/g, '');
 
+        // Sanitize URL data, remove ""
         var jobURLText = resultsArray[i].redirect_url.replace(/\"/g, '');
-        console.log(jobURLText);
 
-    // <div class="card blue-grey darken-1">
-    //     <div class="card-content white-text">
-    //         <span class="card-title">Job Title</span>
-    //         <p>I am a very simple card. I am good at containing small bits of information.
-    //         I am convenient because I require little markup to use effectively.</p>
-    //     </div>
+        // Set Job Object data
+        jobObject.jobTitle = jobTitleText;
+        jobObject.jobCategory = resultsArray[i].category.label;
+        jobObject.companyName = resultsArray[i].company.display_name;
+        jobObject.creationDate = resultsArray[i].created;
+        jobObject.jobLocation = resultsArray[i].location.display_name;
+        jobObject.jobDesc = jobDescriptionText;
+        jobObject.jobURL = jobURLText;
 
-    //     <div class="card-action">
-    //         <a href="#">This is a link</a>
-    //         <a href="#">This is a link</a>
-    //     </div>
-    // </div>
+        // Add new job object to end of our array
+        skillLocationArray.push(jobObject);
+    }
+    return(skillLocationArray);
+}
 
-        //Div to contain individual job info
+/*** Function displayTexasResults: called by getTexasData to display the results of our fetch.
+ *      Loops through 50 results and dynamically displays them to the HTML. ***/
+function displayTexasJobResults (resultsArray) {
+
+    // Empty old results before displaying new ones
+    var searchResultsContainerEL = document.querySelector('#searchResults');
+    searchResultsContainerEL.innerHTML = "";
+
+    // Loop through 50 results
+    for (var i = 0; i < resultsArray.length; i++) {
+
+        //Div to contain individual job result info
         var outerDivEl = document.createElement('div');
         outerDivEl.classList = 'card blue-grey darken-1';
 
@@ -97,30 +119,30 @@ function displayResults (resultsArray) {
         innerDivEl.classList = 'card-content white-text';
 
         var spanJobTitleEl = document.createElement('span');
-        spanJobTitleEl.textContent = jobTitleText;
+        spanJobTitleEl.textContent = resultsArray[i].jobTitle;
 
         var pJobCategoryEl = document.createElement('p');
-        pJobCategoryEl.textContent = resultsArray[i].category.label;
+        pJobCategoryEl.textContent = resultsArray[i].jobCategory;
 
         var pCompanyNameEl = document.createElement('p');
-        pCompanyNameEl.textContent = resultsArray[i].company.display_name;
+        pCompanyNameEl.textContent = resultsArray[i].companyName;
 
         var pJobCreationDateEl = document.createElement('p');
-        pJobCreationDateEl.textContent = resultsArray[i].created;
-
-        var pJobDescriptionEl = document.createElement('p');
-        pJobDescriptionEl.textContent = jobDescriptionText;
+        pJobCreationDateEl.textContent = resultsArray[i].creationDate;
 
         var pJobLocationEl = document.createElement('p');
-        pJobLocationEl.textContent = resultsArray[i].location.display_name;
+        pJobLocationEl.textContent = resultsArray[i].jobLocation;
+
+        var pJobDescriptionEl = document.createElement('p');
+        pJobDescriptionEl.textContent = resultsArray[i].jobDesc;
 
         var anchorDiv = document.createElement('div');
         anchorDiv.classList = 'card-action';
 
         var aJobURLEl = document.createElement('a');
-        aJobURLEl.setAttribute('href', `${resultsArray[i].redirect_url}`);
-        aJobURLEl.textContent = "Click here for more details and to apply for " + jobTitleText;
-        // var hrEl = document.createElement('hr');
+        aJobURLEl.setAttribute('href', resultsArray[i].jobURL);
+        // aJobURLEl.setAttribute('href', `${resultsArray[i].redirect_url}`);
+        aJobURLEl.textContent = "Click here for more details and to apply for " + resultsArray[i].jobTitle;
         
         searchResultsContainerEL.appendChild(outerDivEl);
         outerDivEl.appendChild(innerDivEl);
@@ -128,15 +150,12 @@ function displayResults (resultsArray) {
         innerDivEl.appendChild(pJobCategoryEl);
         innerDivEl.appendChild(pCompanyNameEl);
         innerDivEl.appendChild(pJobCreationDateEl);
-        innerDivEl.appendChild(pJobDescriptionEl);
         innerDivEl.appendChild(pJobLocationEl);
-
+        innerDivEl.appendChild(pJobDescriptionEl);
         outerDivEl.appendChild(anchorDiv);
         anchorDiv.appendChild(aJobURLEl);
     }
 };
 
 /*** Event Listeners ***/
-searchBtnEl.addEventListener('click', buttonClickHandler);
-// optionSelectBoxEl.addEventListener('onchange', selectOptionHandler);
-
+formEl.addEventListener('submit', formSubmitHandler);
