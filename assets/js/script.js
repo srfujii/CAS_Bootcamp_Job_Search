@@ -143,13 +143,8 @@ function displayTexasJobResults(resultsArray) {
         var aJobURLEl = document.createElement('a');
         aJobURLEl.setAttribute('href', resultsArray[i].jobURL);
         // aJobURLEl.setAttribute('href', `${resultsArray[i].redirect_url}`);
-<<<<<<< HEAD
-        aJobURLEl.textContent = "Click here for more details and to apply for " + resultsArray[i].jobTitle;
-
-=======
         aJobURLEl.textContent = "Click here for more details...";
-        
->>>>>>> e223698f0e951b5923171135fdf480e0fad312bd
+
         searchResultsContainerEL.appendChild(outerDivEl);
         outerDivEl.appendChild(innerDivEl);
         innerDivEl.appendChild(h4JobTitleEl);

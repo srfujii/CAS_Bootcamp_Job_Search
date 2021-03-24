@@ -28,31 +28,32 @@ var FormSubmithandler = function(event) {
 
 function getGithubJobData(skillname) {
 
-    // if (localStorage.getItem(`${skillname}-remote`) !== null) {
-    //     var skillRemoteArray = JSON.parse(localStorage.getItem(`${skillname}-remote`));
-    //     displayRemoteJobResults(remoteResultsArray);
-    // }
+    if (localStorage.getItem(`${skillname}-remote`) !== null) {
+        var skillRemoteArray = JSON.parse(localStorage.getItem(`${skillname}-remote`));
+        displayRemoteJobResults(skillRemoteArray);
+    } else {
 
-    var apiUrl = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=remote&description=' + skillname;
-    //var apiUrl = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=remote&description=javascript'
-    /*'https://cors-anywhere.herokuapp.com/' remove this part once deploy to github pages so it doesnt conflict w/ cors*/
+        var apiUrl = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=remote&description=' + skillname;
+        //var apiUrl = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=remote&description=javascript'
+        /*'https://cors-anywhere.herokuapp.com/' remove this part once deploy to github pages so it doesnt conflict w/ cors*/
 
-    fetch(apiUrl)
-        .then(function(response) {
-            if (response.ok) {
-                response.json().then(function(data) {
-                    console.log(data);
-                    var remoteResultsArray = displayRemoteJobResults(data);
-                    localStorage.setItem(`${skillname}-remote`, JSON.stringify(remoteResultsArray));
-                });
-            } else {
-                alert('Error: ' + response.statusText);
-            }
-        })
-        .catch(function(error) {
-            alert('Unable to connect to GitHub Jobs');
-            console.log(error)
-        });
+        fetch(apiUrl)
+            .then(function(response) {
+                if (response.ok) {
+                    response.json().then(function(data) {
+                        console.log(data);
+                        var remoteResultsArray = displayRemoteJobResults(data);
+                        localStorage.setItem(`${skillname}-remote`, JSON.stringify(remoteResultsArray));
+                    });
+                } else {
+                    alert('Error: ' + response.statusText);
+                }
+            })
+            .catch(function(error) {
+                alert('Unable to connect to GitHub Jobs');
+                console.log(error)
+            });
+    }
 }
 
 function setRemoteJobs() {}
@@ -78,6 +79,9 @@ function displayRemoteJobResults(resultsArray) {
         console.log("Description: " + resultsArray[i].description);
         //console.log("Job Category: " + resultsArray[i].category.label);
         console.log("Apply: " + resultsArray[i].how_to_apply);
+
+
+
     }
     return (skillRemoteArray);
 };
