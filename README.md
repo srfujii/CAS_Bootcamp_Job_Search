@@ -1,7 +1,7 @@
 # CAS Bootcamp Job Search Engine
-
+​
 ## Table of Contents
-
+​
 - [Description](#Description)
 - [Motivation](#Motivation)
 - [Why We Built This](#Why-We-Built-This)
@@ -13,7 +13,7 @@
 - [License](#License)
 - [Features](#Features)
 - [Contribute](#How-to-Contribute)
-
+​
 ## Description
 
 This job search engine allows Coding Bootcamp graduates to search for jobs based on the skills they have learned during Bootcamp. Users can select a desired skill from the drop-down menu and also choose whether they prefer a local Texas job or a Remote job that will allow them to work from home. When they select their criteria, they are presented with search results that match their criteria. Searches are saved to local storage for fast re-searching later. As a team on our journey toward full-stack development, we used our recently acquired skills and knowledge to build this web application from scratch. We conceived, designed, and executed a web app that solves a real-world problem by integrating data received from multiple server-side API requests. We worked collaboratively using agile development methodologies to implement feature and bug fixes using the git branch workflow and pull requests.
@@ -49,37 +49,36 @@ We wanted to build a focused job search engine for BootCamp students that allows
 To view this project, simply visit (https://srfujii.github.io/CAS_Bootcamp_Job_Search/index.html)
  
 To install this project on your local machine, simply visit this repo at (https://github.com/srfujii/CAS_Bootcamp_Job_Search) and use git to clone it to your local environment.
-
-
+​
+​
 ## Usage
 Users can enter in their desired Bootcamp skill and preferred location (Texas or Remote) and click the "search" button to display a list of jobs that are in need of that particular skill and are in the user's desired location. Recently searched skillset-location combinations are saved to local storage and are displayed to the right of the search box for ease of access. 
-
-
+​
+​
 ## Screenshots
 Here are some screenshots for you to preview how the Job Search Engine looks and feels:
-
 ### CAS Bootcamp Job Engine UI:
 ![User Interface with several cities saved](./assets/images/01-UI.png)
 ![Local Storage Cities Saved](./assets/images/02-local-storage.png)
 ![User Input Sanitization](./assets/images/03-input-sanitization.png)
-
-
+​
+​
 ## Credits
-
+​
 1. [Rice Technology Bootcamp](https://techbootcamps.rice.edu/)
-
-
+​
+​
 ### Resources:
-
+​
 1. [Geeks for Geeks: How to Remove Text from a String](https://www.geeksforgeeks.org/how-to-remove-text-from-a-string-in-javascript/)
 2. [Adzuna API Documentation](https://developer.adzuna.com/docs/search)
 3. [GitHub Jobs API Documentation](https://jobs.github.com/api)
-
-
+​
+​
 ## License
 [MIT License](./license.txt)
-
-
+​
+​
 ## Features
 
 	* Application uses at least two server-side APIs.
@@ -123,7 +122,7 @@ Here are some screenshots for you to preview how the Job Search Engine looks and
     <li>All buttons and links work</li>
     <li>Title is concise and descriptive</li>
 </ol>
-
-
+​
+​
 ## How to Contribute
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](./code_of_conduct.md)
