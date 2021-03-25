@@ -18,7 +18,6 @@ function getGithubJobData(skillname) {
             .then(function(response) {
                 if (response.ok) {
                     response.json().then(function(data) {
-                        console.log(data);
                         var remoteResultsArray = data;
                         displayRemoteJobResults(remoteResultsArray);
                         localStorage.setItem(`${skillname}-remote`, JSON.stringify(remoteResultsArray));
