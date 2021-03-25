@@ -12,7 +12,7 @@ function getGithubJobData(skillname) {
         var JobRemoteArray = JSON.parse(localStorage.getItem(`${skillname}-remote`));
         displayRemoteJobResults(JobRemoteArray);
     } else {
-        var apiUrl = 'https://jobs.github.com/positions.json?location=remote&description=' + skillname;
+        var apiUrl = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=remote&description=' + skillname;
         var headers = new Headers({ mode: "no-cors", 'Access-Control-Allow-Origin': '*'});
         fetch(apiUrl, { headers: headers })
             .then(function(response) {
