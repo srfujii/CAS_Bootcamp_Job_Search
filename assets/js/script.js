@@ -40,7 +40,7 @@ function getTexasJobData(skillName) {
     } else {
         // Set our fetch URL to skill selected
         var apiUrl = 'https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=81c88f02&app_key=8fd8923d7be696f1f642efb26fcc6fd7&results_per_page=50&what=' + skillName + '&where=Texas';
-
+        fetch(apiUrl, { headers: headers })
         fetch(apiUrl)
             .then(function(response) {
                 if (response.ok) {
