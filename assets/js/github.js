@@ -5,26 +5,27 @@ type: fulltime[yes/no{parttime/contract}]
 */
 
 //var formEl = document.querySelector('#searchForm');
-var formEl = document.querySelector('#searchBtn'); // Reference to search button
+//var formEl = document.querySelector('#searchBtn'); // Reference to search button
+
 var chosenSkill = " ";
 
-var FormSubmithandler = function(event) {
-    event.preventDefault(); // Prevent default action
-    console.log("We clicked the button");
+// var FormSubmithandler = function(event) {
+//     event.preventDefault(); // Prevent default action
+//     console.log("We clicked the button");
 
-    var pickedValue = document.getElementById("optionSelectBox").value; // Get the selected value number 0-5 from the option that was selected
-    var chosenText = document.getElementById(`${pickedValue}`); // Get reference to html ID associated with selected option
-    chosenText = chosenText.textContent; // Get the Text content from the selected option
-    chosenSkill = chosenText;
+//     var pickedValue = document.getElementById("optionSelectBox").value; // Get the selected value number 0-5 from the option that was selected
+//     var chosenText = document.getElementById(`${pickedValue}`); // Get reference to html ID associated with selected option
+//     chosenText = chosenText.textContent; // Get the Text content from the selected option
+//     chosenSkill = chosenText;
 
-    var selectedRemote = document.getElementById("remote");
+//     var selectedRemote = document.getElementById("remote");
 
-    if (selectedRemote.checked) {
-        getGithubJobData(chosenSkill);
-    } else {
-        return ("error");
-    }
-};
+//     if (selectedRemote.checked) {
+//         getGithubJobData(chosenSkill);
+//     } else {
+//         return ("error");
+//     }
+// };
 
 function getGithubJobData(skillname) {
 
@@ -98,17 +99,17 @@ function displayRemoteJobResults(resultsArray) {
     searchResultsContainerEL.appendChild(searchResultsTitleEl);
 
     // Loop through 50 results
-    for (var i = 0; i < resultsArray.length; i++) {
-        console.log("Job Type: " + resultsArray[i].type);
-        console.log("Job URL: " + resultsArray[i].url);
-        console.log("Job Created On: " + resultsArray[i].created_at);
-        console.log("Company Name: " + resultsArray[i].company);
-        console.log("Job Location: " + resultsArray[i].location);
-        console.log("Job Title: " + resultsArray[i].title);
-        console.log("Description: " + resultsArray[i].description);
-        console.log("Apply: " + resultsArray[i].how_to_apply);
-        //console.log("Job Category: " + resultsArray[i].category.label);
-    }
+    // for (var i = 0; i < resultsArray.length; i++) {
+    //     console.log("Job Type: " + resultsArray[i].type);
+    //     console.log("Job URL: " + resultsArray[i].url);
+    //     console.log("Job Created On: " + resultsArray[i].created_at);
+    //     console.log("Company Name: " + resultsArray[i].company);
+    //     console.log("Job Location: " + resultsArray[i].location);
+    //     console.log("Job Title: " + resultsArray[i].title);
+    //     console.log("Description: " + resultsArray[i].description);
+    //     console.log("Apply: " + resultsArray[i].how_to_apply);
+    //console.log("Job Category: " + resultsArray[i].category.label);
+    //}
 
     for (var i = 0; i < resultsArray.length; i++) {
 
@@ -134,7 +135,7 @@ function displayRemoteJobResults(resultsArray) {
         pLocationEl.textContent = resultsArray[i].location;
 
         var pDescriptionEl = document.createElement('p');
-        pDescriptionEl.textContent = resultsArray[i].description;
+        pDescriptionEl.innerHTML = resultsArray[i].description;
 
         var anchorDiv = document.createElement('div');
         anchorDiv.classList = 'card-action';
@@ -154,8 +155,20 @@ function displayRemoteJobResults(resultsArray) {
         innerDivEl.appendChild(pDescriptionEl);
         outerDivEl.appendChild(anchorDiv);
         anchorDiv.appendChild(aApplyEl);
-
     }
 };
-formEl.addEventListener('click', FormSubmithandler);
+
+// function truncateText(selector, maxLength) {
+//     var element = document.querySelector(selector),
+//         truncated = element.innerText;
+
+//     if (truncated.length > maxLength) {
+//         truncated = truncated.substr(0, maxLength) + '...';
+//     }
+//     return truncated;
+// }
+
+// document.querySelector('p').innerText = truncateText('p', 50);
+
+//formEl.addEventListener('click', FormSubmithandler);
 //formEl.addEventListener('submit', FormSubmithandler);
