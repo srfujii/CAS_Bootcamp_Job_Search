@@ -22,6 +22,7 @@ function formSubmitHandler(event) {
     if (selectedTexas.checked) {
         getTexasJobData(selectedSkill);
     } else {
+        getGithubJobData(selectedSkill);
         // Run Cesar's Web API query for Remote
         console.log("Cesar web API query to run here!");
     }
