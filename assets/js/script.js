@@ -24,7 +24,6 @@ function formSubmitHandler(event) {
     } else {
         getGithubJobData(selectedSkill);
         // Run Cesar's Web API query for Remote
-        getGithubJobData(selectedSkill);
         console.log("Cesar web API query to run here!");
     }
 
